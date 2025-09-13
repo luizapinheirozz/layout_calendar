@@ -1,4 +1,7 @@
 $day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$font-day: 30px;
 
 body {
   margin: 0;
@@ -9,11 +12,11 @@ body {
 }
 
 .calendar {
-  padding: 10px;
+  padding: $padding;
   display: flex;
-  gap: 1px;
+  gap: $gap;
   flex-wrap: wrap;
-  max-width: $day-size * 7 + 10px;
+  max-width: $day-size * 7 + $padding;
 
   &__day {
     box-sizing: border-box;
@@ -22,7 +25,6 @@ body {
     height: $day-size;
     border: 1px solid #000;
     transition:
-      cursor 0.5s,
       transform 0.5s,
       background-color 0.5s;
 
@@ -36,7 +38,7 @@ body {
 
     &::before {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
+      font-size: $font-day;
       display: flex;
       justify-content: center;
       line-height: $day-size;
@@ -52,7 +54,7 @@ body {
   $days: mon, tue, wed, thu, fri, sat, sun;
 
   @each $day in $days {
-    &__start-day--#{$day} {
+    &--start-day-#{$day} {
       .calendar__day:first-child {
         /* stylelint-disable-next-line scss/no-global-function-names */
         $day-index: index($days, $day) - 1;
@@ -63,7 +65,7 @@ body {
   }
 
   @for $i from 28 through 31 {
-    &__month-length--#{$i} {
+    &--month-length-#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
