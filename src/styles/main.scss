@@ -1,7 +1,12 @@
 $day-size: 100px;
 $gap: 1px;
 $padding: 10px;
-$font-day: 30px;
+$font-size-day: 30px;
+$font-family-day: Arial, Helvetica, sans-serif;
+$columns: 7;
+$border: 1px solid #000;
+$bg-day: #eee;
+$bg-day-hover: #ffbfcb;
 
 body {
   margin: 0;
@@ -12,18 +17,18 @@ body {
 }
 
 .calendar {
-  padding: $padding;
+  padding: $padding / 2;
   display: flex;
   gap: $gap;
   flex-wrap: wrap;
-  max-width: $day-size * 7 + $padding;
+  max-width: ($day-size * $columns) + ($gap * ($columns - 1)) + $padding;
 
   &__day {
     box-sizing: border-box;
-    background-color: #eee;
+    background-color: $bg-day;
     width: $day-size;
     height: $day-size;
-    border: 1px solid #000;
+    border: $border;
     transition:
       transform 0.5s,
       background-color 0.5s;
@@ -37,17 +42,19 @@ body {
     }
 
     &::before {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: $font-day;
+      width: 100%;
+      height: 100%;
+      font-family: $font-family-day;
+      font-size: $font-size-day;
       display: flex;
       justify-content: center;
-      line-height: $day-size;
+      align-items: center;
     }
 
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
-      background-color: #ffbfcb;
+      background-color: $bg-day-hover;
     }
   }
 
@@ -59,7 +66,7 @@ body {
         /* stylelint-disable-next-line scss/no-global-function-names */
         $day-index: index($days, $day) - 1;
 
-        margin-left: $day-size * $day-index + $day-index;
+        margin-left: ($day-size + $gap) * $day-index;
       }
     }
   }
